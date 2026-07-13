@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "sean-skills",
+  "description": "Sean's personal Claude Code plugins for SaaS engineering and automations.",
+  "owner": {
+    "name": "Sean Stuart Urgel",
+    "email": "sean@casperstudios.xyz"
+  },
+  "plugins": [
+    {
+      "name": "saas-toolkit",
+      "source": "./plugins/saas-toolkit",
+      "description": "Skills for day-to-day SaaS engineering work.",
+      "category": "development",
+      "tags": ["saas", "engineering"]
+    },
+    {
+      "name": "automation-toolkit",
+      "source": "./plugins/automation-toolkit",
+      "description": "Skills for building and wiring up automations.",
+      "category": "automation",
+      "tags": ["automation", "integrations"]
+    }
+  ]
+}
