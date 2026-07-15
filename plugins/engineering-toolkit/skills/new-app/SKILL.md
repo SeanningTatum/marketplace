@@ -95,8 +95,8 @@ Built on the Cloudflare SaaS stack: **Cloudflare Workers + React Router v7 + tRP
 If no description was given, write just the name line and the stack line — do
 not fabricate a description.
 
-Verify `CLAUDE.md` is still a symlink afterward (`ls -l <app-name>/CLAUDE.md`
-should show `CLAUDE.md -> AGENTS.md`).
+Verify `CLAUDE.md` is still a symlink afterward — from inside the new app dir,
+`ls -l CLAUDE.md` should show `CLAUDE.md -> AGENTS.md`.
 
 ### 5. Hand off `bun setup`
 

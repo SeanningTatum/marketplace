@@ -24,7 +24,8 @@ diff — the squash commit is the source of truth.
 
 ```bash
 gh pr merge <n> --squash --delete-branch
-git switch main && git pull
+default_branch=$(gh repo view --json defaultBranchRef --jq '.defaultBranchRef.name')
+git switch "$default_branch" && git pull
 git log --oneline -1   # record the squash SHA for the notes
 ```
 
@@ -78,8 +79,9 @@ explicit go-ahead before running:
 
 ```bash
 tmp=$(mktemp -d)
+default_branch=$(gh repo view --json defaultBranchRef --jq '.defaultBranchRef.name')
 # write notes to "$tmp/release-vX.Y.Z.md" first
-gh release create vX.Y.Z --target main \
+gh release create vX.Y.Z --target "$default_branch" \
   --title "vX.Y.Z — <hook>" --notes-file "$tmp/release-vX.Y.Z.md"
 ```
 
