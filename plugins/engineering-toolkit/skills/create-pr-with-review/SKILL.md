@@ -91,7 +91,7 @@ editing.
 ### 4. Create the PR
 
 - Build the body with the **`/pr-format`** structure (Why / What / How /
-  Verification / Caveats / Next steps). Note in Verification that a Greptile
+  Solution / Verification / Caveats / Next steps). Note in Verification that a Greptile
   review ran pre-PR and how findings were handled (N auto-fixed, M escalated).
 - Push: `git push -u origin <branch>`.
 - **Confirm before creating** — show the final title + body and the exact `gh`

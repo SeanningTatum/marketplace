@@ -21,8 +21,8 @@ resolve the PR for the current branch.
 - After a reviewer (human or bot: Greptile, CodeRabbit, Copilot) leaves comments.
 - Runs `/resolve-comments`.
 
-Do **not** use this to write a PR body (that's `/pr-format`) or to review a
-diff yourself (that's `/code-review`).
+Do **not** use this to write a PR body (that's `/pr-format`) or to run a
+pre-PR review pass yourself (that's `/create-pr-with-review`).
 
 ## The severity ruleset
 

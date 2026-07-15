@@ -1,5 +1,7 @@
 ---
-description: Starter skill template. Replace this with a real SaaS engineering skill. Delete once you add your own.
+name: example-skill
+description: Starter skill template. Replace this with a real engineering skill. Delete once you add your own.
+user-invocable: true
 ---
 
 # Example Skill
