@@ -5,6 +5,7 @@ description: >
   semver tag, and publish a GitHub release with marketing-grade notes in this
   repo's established voice. Use when asked to "cut a release", "ship vX.Y.Z",
   "squash merge and tag", or "write release notes".
+user-invocable: true
 ---
 
 # release
@@ -64,13 +65,22 @@ The voice, distilled:
 - Numbers sell: test counts before/after, "~30 duplicated blocks gone".
   Never pad — every bullet must map to something real in the diff.
 
-Write the body to a scratch file, don't inline it in the command.
+Write the body to a scratch file (`mktemp -d` gives a portable temp dir —
+this skill runs in other installs, so don't assume any fixed path), don't
+inline it in the command.
 
 ## 5. Publish
 
+**Confirm before creating** — a release is outward-facing: it creates a tag,
+fires webhooks, and notifies watchers, and is harder to retract than a PR.
+Show the human the final title, hook line, and rendered notes, and get an
+explicit go-ahead before running:
+
 ```bash
+tmp=$(mktemp -d)
+# write notes to "$tmp/release-vX.Y.Z.md" first
 gh release create vX.Y.Z --target main \
-  --title "vX.Y.Z — <hook>" --notes-file <scratch>/release-vX.Y.Z.md
+  --title "vX.Y.Z — <hook>" --notes-file "$tmp/release-vX.Y.Z.md"
 ```
 
 `gh release create` creates the tag — don't pre-tag manually.
