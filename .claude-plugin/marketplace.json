@@ -8,11 +8,11 @@
   },
   "plugins": [
     {
-      "name": "saas-toolkit",
-      "source": "./plugins/saas-toolkit",
-      "description": "Skills for day-to-day SaaS engineering work.",
+      "name": "engineering-toolkit",
+      "source": "./plugins/engineering-toolkit",
+      "description": "General software engineering skills and workflows.",
       "category": "development",
-      "tags": ["saas", "engineering"]
+      "tags": ["engineering", "development"]
     },
     {
       "name": "automation-toolkit",
