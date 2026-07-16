@@ -1,6 +1,6 @@
 ---
 name: new-app
-description: Scaffold a new application from the cf-saas-starter-react-router template. Clones the template into a new directory, resets git history, then hands off the interactive `bun setup` wizard and updates the app's AGENTS.md (which CLAUDE.md symlinks to) with the app name and description. Use when asked to "create a new app", "scaffold a new project", "start a new SaaS app", "spin up a new app from the template", or invokes /new-app.
+description: Scaffold a new application from the cf-saas-starter-react-router template. Creates a brand-new GitHub repository from the template on the remote, clones it locally, seeds the app's AGENTS.md (which CLAUDE.md symlinks to) with the app name and description, then hands off the interactive `bun setup` wizard. Use when asked to "create a new app", "scaffold a new project", "start a new SaaS app", "spin up a new app from the template", or invokes /new-app.
 user-invocable: true
 ---
 
@@ -8,9 +8,11 @@ user-invocable: true
 
 Scaffold a brand-new application from the
 [`cf-saas-starter-react-router`](https://github.com/SeanningTatum/cf-saas-starter-react-router)
-template. The skill clones the template, gives it a clean git history, seeds the
-app's context docs with the new app's name + description, then hands off the
-Cloudflare setup wizard for the user to run interactively.
+template. The skill creates a **new GitHub repository from the template** on the
+remote (GitHub's template feature — fresh single-commit history, its own repo,
+no fork link), clones it locally with `origin` already wired, seeds the app's
+context docs with the new app's name + description, then hands off the Cloudflare
+setup wizard for the user to run interactively.
 
 Template stack: Cloudflare Workers + React Router v7 + tRPC + D1/Drizzle +
 Better Auth + Effect TS + ShadCN/Tailwind, with a `.brain/` agent harness.
@@ -22,13 +24,18 @@ Collect these before doing anything. `$ARGUMENTS` may contain the app name
 whatever is missing:
 
 - **App name** (required) — kebab-case, lowercase, no spaces. This becomes the
-  new directory name and the Cloudflare project name. If the user gave a name
-  with other casing/spaces, sanitize it (lowercase, spaces → `-`) and confirm.
+  new GitHub repo name, the local directory name, and the Cloudflare project
+  name. If the user gave a name with other casing/spaces, sanitize it
+  (lowercase, spaces → `-`) and confirm.
 - **Description** (optional) — one sentence on what the app is. If omitted,
-  proceed without it; do not block.
+  proceed without it; do not block. Passed to `gh repo create --description`.
+- **Visibility** (required by `gh repo create`) — `private` or `public`.
+  Default to **private**; confirm with the user before creating a public repo.
+- **Owner** (optional) — a GitHub org/user to own the new repo. Defaults to the
+  authenticated user. To target an org, create the repo as `<owner>/<app-name>`.
 
-If the app name is missing, ask for it (with description as an optional
-follow-up) using AskUserQuestion — do not invent a name.
+If the app name is missing, ask for it (with description + visibility as
+follow-ups) using AskUserQuestion — do not invent a name.
 
 ## Steps
 
@@ -36,35 +43,45 @@ Run these in order. Stop and report if any step fails; do not silently continue.
 
 ### 1. Pre-flight
 
-- Confirm `git` and `bun` are on PATH (`git --version`, `bun --version`). If
-  `bun` is missing, tell the user to install it (https://bun.sh) and stop.
-- Confirm the target directory does not already exist. Clone into the current
-  working directory by default (`./<app-name>`). If `<app-name>/` already
-  exists, stop and ask — never clobber.
+- Confirm `git`, `gh`, and `bun` are on PATH (`git --version`, `gh --version`,
+  `bun --version`). If `bun` is missing, tell the user to install it
+  (https://bun.sh) and stop.
+- Confirm `gh` is authenticated: `gh auth status`. If not, tell the user to run
+  `! gh auth login` and stop — you cannot authenticate for them.
+- Confirm the target directory does not already exist. The clone lands in the
+  current working directory by default (`./<app-name>`). If `<app-name>/`
+  already exists, stop and ask — never clobber.
 
-### 2. Clone the template
+### 2. Create the repo from the template + clone
+
+Use GitHub's template feature to create a **new remote repo** from the template
+and clone it in one step. This gives the app its own repo with a fresh
+single-commit history and `origin` already pointing at the new repo — no fork
+link, no manual history reset.
 
 ```bash
-git clone https://github.com/SeanningTatum/cf-saas-starter-react-router <app-name>
+gh repo create <app-name> \
+  --template SeanningTatum/cf-saas-starter-react-router \
+  --private \
+  ${DESCRIPTION:+--description "<description>"} \
+  --clone
 ```
 
-### 3. Reset git history
+- Swap `--private` for `--public` only when the user chose public.
+- To create under an org, use `<owner>/<app-name>` as the name.
+- `--clone` clones into `./<app-name>`. `origin` is the new repo, not the
+  template.
+- The template repo must be marked as a **template repository** on GitHub for
+  `--template` to work; if `gh` reports it is not a template, stop and tell the
+  user to enable *Settings → Template repository* on
+  `SeanningTatum/cf-saas-starter-react-router`.
 
-The new app is its own project, not a fork of the template. Give it a fresh
-history:
-
-```bash
-cd <app-name>
-rm -rf .git
-git init
-```
-
-Do **not** commit yet — `bun setup` (step 5) writes `wrangler.jsonc`, `.env`,
-and other generated files, and installing deps configures git hooks
+Do **not** commit or push yet — `bun setup` (step 4) writes `wrangler.jsonc`,
+`.env`, and other generated files, and installing deps configures git hooks
 (`core.hooksPath .githooks`). Let the user make the first commit after setup so
 those land in it.
 
-### 4. Update the app context docs
+### 3. Update the app context docs
 
 The template's context lives in `AGENTS.md`. **`CLAUDE.md` is a symlink to
 `AGENTS.md`** — edit `AGENTS.md` only, and never replace the symlink with a
@@ -98,7 +115,7 @@ not fabricate a description.
 Verify `CLAUDE.md` is still a symlink afterward — from inside the new app dir,
 `ls -l CLAUDE.md` should show `CLAUDE.md -> AGENTS.md`.
 
-### 5. Hand off `bun setup`
+### 4. Hand off `bun setup`
 
 `bun setup` is an **interactive** first-time wizard that logs into Cloudflare,
 creates real cloud resources (D1 database, R2 bucket, optional KV), generates a
@@ -123,8 +140,9 @@ account (`wrangler login`) and will create/deploy live resources.
 
 Report to the user:
 
-- Where the app was cloned (`./<app-name>`).
-- That git history was reset (fresh `git init`, nothing committed yet).
+- The new GitHub repo URL and its visibility (private/public).
+- Where it was cloned locally (`./<app-name>`), with `origin` wired to the new
+  repo. Nothing committed yet beyond the template's initial commit.
 - That `AGENTS.md`/`CLAUDE.md` now describe the new app.
 - The exact `bun install && bun setup` commands to run next, and that setup is
   theirs to run interactively because it touches their Cloudflare account.
