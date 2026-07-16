@@ -76,12 +76,12 @@ gh repo create <app-name> \
   user to enable *Settings → Template repository* on
   `SeanningTatum/cf-saas-starter-react-router`.
 
-Do **not** commit or push yet — `bun setup` (step 5) writes `wrangler.jsonc`,
+Do **not** commit or push yet — `bun setup` (step 4) writes `wrangler.jsonc`,
 `.env`, and other generated files, and installing deps configures git hooks
 (`core.hooksPath .githooks`). Let the user make the first commit after setup so
 those land in it.
 
-### 4. Update the app context docs
+### 3. Update the app context docs
 
 The template's context lives in `AGENTS.md`. **`CLAUDE.md` is a symlink to
 `AGENTS.md`** — edit `AGENTS.md` only, and never replace the symlink with a
@@ -115,7 +115,7 @@ not fabricate a description.
 Verify `CLAUDE.md` is still a symlink afterward — from inside the new app dir,
 `ls -l CLAUDE.md` should show `CLAUDE.md -> AGENTS.md`.
 
-### 5. Hand off `bun setup`
+### 4. Hand off `bun setup`
 
 `bun setup` is an **interactive** first-time wizard that logs into Cloudflare,
 creates real cloud resources (D1 database, R2 bucket, optional KV), generates a
