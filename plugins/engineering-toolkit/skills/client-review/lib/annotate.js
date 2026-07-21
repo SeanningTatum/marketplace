@@ -354,12 +354,6 @@
     return !!(state.author && reply && reply.author === state.author.name && reply.role === state.author.role);
   }
 
-  function setStatus(comment, status) {
-    comment.status = status;
-    persist();
-    renderAll();
-  }
-
   function deleteComment(comment) {
     if (!isOwn(comment)) return;
     var i = state.comments.indexOf(comment);

@@ -169,6 +169,11 @@ lines.push(resolvedCount > 0
   : `${sorted.length} ${plural}`);
 lines.push('');
 
+// Indent continuation lines of a multi-line body so it stays inside its
+// markdown list item. Without this, a comment like "First.\n\nSecond." breaks
+// out of the list and parsers (and agent consumers) drop the continuation.
+const indentBody = (body, pad) => String(body || '').replace(/\n/g, `\n${pad}`);
+
 sorted.forEach((c, i) => {
   const n = i + 1;
   const bodyPreview = truncateOneLine(c.body, 60);
@@ -178,12 +183,12 @@ sorted.forEach((c, i) => {
   const author = c.author || 'unknown';
   const role = c.role || 'unknown';
   lines.push(`- by: ${author} (${role}) · ${fmtDate(c.at)}`);
-  lines.push(`- comment: ${c.body || ''}`);
+  lines.push(`- comment: ${indentBody(c.body, '  ')}`);
   if (Array.isArray(c.replies)) {
     for (const r of c.replies) {
       const rAuthor = r.author || 'unknown';
       const rRole = r.role || 'unknown';
-      lines.push(`  - ↳ reply · ${rAuthor} (${rRole}) · ${fmtDate(r.at)}: ${r.body || ''}`);
+      lines.push(`  - ↳ reply · ${rAuthor} (${rRole}) · ${fmtDate(r.at)}: ${indentBody(r.body, '    ')}`);
     }
   }
   lines.push('');

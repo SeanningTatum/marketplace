@@ -109,7 +109,9 @@ const blobContent = existingBlock ? existingBlock.content.trim() : DEFAULT_BLOB;
 // exported (stamped data-cr-stage="returned") stays in reviewer stage even
 // if it is re-injected.
 
-const htmlTagRe = /<html\b([^>]*)>/i;
+// Quoted-attribute-aware: skip over `>` characters inside quoted attribute
+// values so the capture doesn't stop early on a tag like <html lang="a>b">.
+const htmlTagRe = /<html\b((?:[^>"']|"[^"]*"|'[^']*')*)>/i;
 const htmlTagMatch = htmlTagRe.exec(html);
 
 if (!htmlTagMatch) {

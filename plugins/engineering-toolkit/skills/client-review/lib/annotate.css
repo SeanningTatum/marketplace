@@ -388,24 +388,6 @@ html.cr-mode-on .cr-seg {
   margin-left: auto;
 }
 
-.cr-status-pill {
-  font-size: 10px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-  padding: 2px 7px;
-  border-radius: 999px;
-  background: var(--cr-highlight);
-  color: var(--cr-accent);
-  border: 1px solid rgba(217, 119, 87, 0.35);
-}
-
-.cr-status-pill.resolved {
-  background: transparent;
-  color: var(--cr-muted);
-  border-color: var(--cr-border);
-}
-
 .cr-card-anchor-hint {
   font-size: 11px;
   color: var(--cr-muted);
