@@ -1,0 +1,922 @@
+/*
+ * client-review annotation layer — styles.
+ *
+ * Injected into an arbitrary host document (see inject.mjs), so every rule
+ * is scoped to our own prefixed classes/attributes and every custom
+ * property is namespaced (--cr-*) so it can never collide with a host
+ * doc's own `--bg` / `--accent` / etc. (the template.html starter doc
+ * happens to define those exact generic names for its own content).
+ *
+ * Palette (brain-axi warm editorial):
+ *   bg #faf9f5  surface #fff  ink #141413  muted #73726c
+ *   border #dedcd1  accent #d97757  highlight #fff7ca
+ *
+ * All top-level containers we create carry [data-cr-ui] so annotate.js can
+ * exclude them from click handling / cssPath / snapshots with one
+ * `closest("[data-cr-ui]")` check, and so this stylesheet can flip cursor
+ * back to normal over our own UI while comment mode is on.
+ */
+
+:root {
+  --cr-bg: #faf9f5;
+  --cr-surface: #fff;
+  --cr-ink: #141413;
+  --cr-muted: #73726c;
+  --cr-border: #dedcd1;
+  --cr-accent: #d97757;
+  --cr-accent-ink: #fff;
+  --cr-highlight: #fff7ca;
+  --cr-danger: #b3492f;
+  --cr-shadow: 0 8px 30px rgba(20, 20, 19, 0.18);
+  --cr-radius: 10px;
+  --cr-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+/* ---- reset scoped to our own subtrees only ---------------------------- */
+
+[data-cr-ui],
+[data-cr-ui] * {
+  box-sizing: border-box;
+  font-family: var(--cr-font);
+  -webkit-font-smoothing: antialiased;
+}
+
+[data-cr-ui] button,
+[data-cr-ui] textarea,
+[data-cr-ui] input {
+  font: inherit;
+  color: inherit;
+}
+
+/* ---- comment-mode cursor over the HOST document ----------------------- */
+/* Applied to <html> by annotate.js while comment mode is on. The two
+   capture sub-modes read very differently: Free pin is a precise "click
+   exactly here" action (crosshair), Highlight is a "hover to preview, then
+   click a block" action (pointer) — see the hover-outline box below for the
+   preview itself. Our own UI (anything under a [data-cr-ui] root) always
+   keeps its normal cursor — the override rules below must win, hence they
+   are declared after and reinforced with matching specificity + !important. */
+
+html.cr-mode-on.cr-capture-pin,
+html.cr-mode-on.cr-capture-pin * {
+  cursor: crosshair !important;
+}
+
+html.cr-mode-on.cr-capture-anchor,
+html.cr-mode-on.cr-capture-anchor * {
+  cursor: pointer !important;
+}
+
+html.cr-mode-on [data-cr-ui],
+html.cr-mode-on [data-cr-ui] * {
+  cursor: auto !important;
+}
+
+html.cr-mode-on [data-cr-ui] button,
+html.cr-mode-on [data-cr-ui] a {
+  cursor: pointer !important;
+}
+
+html.cr-mode-on [data-cr-ui] textarea,
+html.cr-mode-on [data-cr-ui] input[type="text"] {
+  cursor: text !important;
+}
+
+/* ---- reviewer stage: no new-comment capture UI ------------------------ */
+/* The rail is the reviewer's whole surface — the capture segmented control
+   and the "Comment" mode button (both only ever relevant to authoring new
+   anchored comments) are hidden outright. The 💬 rail toggle stays. */
+
+html.cr-stage-returned .cr-seg,
+html.cr-stage-returned .cr-btn-mode {
+  display: none !important;
+}
+
+/* ---- floating toggle buttons (bottom-right) --------------------------- */
+
+.cr-toggles {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 2147483000;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  pointer-events: none;
+}
+
+.cr-toggles > * {
+  pointer-events: auto;
+}
+
+.cr-btn-rail {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid var(--cr-border);
+  background: var(--cr-surface);
+  color: var(--cr-ink);
+  box-shadow: var(--cr-shadow);
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.12s, transform 0.12s;
+}
+
+.cr-btn-rail:hover {
+  border-color: var(--cr-accent);
+  transform: translateY(-1px);
+}
+
+.cr-btn-rail.open {
+  border-color: var(--cr-accent);
+  color: var(--cr-accent);
+}
+
+.cr-count-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: var(--cr-accent);
+  color: var(--cr-accent-ink);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 18px;
+  text-align: center;
+  box-shadow: 0 0 0 2px var(--cr-surface);
+}
+
+.cr-count-badge.zero {
+  display: none;
+}
+
+.cr-btn-mode {
+  height: 44px;
+  padding: 0 18px 0 16px;
+  border-radius: 999px;
+  border: 1px solid var(--cr-border);
+  background: var(--cr-surface);
+  color: var(--cr-ink);
+  box-shadow: var(--cr-shadow);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.12s, border-color 0.12s, color 0.12s, transform 0.12s;
+}
+
+.cr-btn-mode:hover {
+  transform: translateY(-1px);
+  border-color: var(--cr-accent);
+}
+
+.cr-btn-mode .cr-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--cr-muted);
+}
+
+.cr-btn-mode.active {
+  background: var(--cr-accent);
+  border-color: var(--cr-accent);
+  color: var(--cr-accent-ink);
+}
+
+.cr-btn-mode.active .cr-dot {
+  background: var(--cr-accent-ink);
+}
+
+/* ---- capture-mode segmented control (Select / Pin) ---------------------
+   Part of the same floating cluster as the rail + mode buttons; only
+   meaningful while comment mode is on, so it stays hidden until the host
+   <html> carries .cr-mode-on (see setCommentMode in annotate.js). */
+
+.cr-seg {
+  display: none;
+  align-items: center;
+  height: 44px;
+  padding: 4px;
+  border-radius: 999px;
+  border: 1px solid var(--cr-border);
+  background: var(--cr-surface);
+  box-shadow: var(--cr-shadow);
+  gap: 2px;
+}
+
+html.cr-mode-on .cr-seg {
+  display: inline-flex;
+}
+
+.cr-seg-btn {
+  height: 36px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--cr-muted);
+  cursor: pointer;
+  font-size: 12.5px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background 0.12s, color 0.12s;
+}
+
+.cr-seg-btn:hover {
+  color: var(--cr-ink);
+}
+
+.cr-seg-btn.active {
+  background: var(--cr-accent);
+  color: var(--cr-accent-ink);
+}
+
+.cr-seg-btn.active:hover {
+  color: var(--cr-accent-ink);
+}
+
+/* ---- rail ---------------------------------------------------------------
+   Overlay on the right; hidden = translated fully off-screen so it never
+   permanently covers doc content. */
+
+.cr-rail {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2147482900;
+  width: min(380px, 92vw);
+  background: var(--cr-bg);
+  border-left: 1px solid var(--cr-border);
+  box-shadow: var(--cr-shadow);
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.18s ease;
+  color: var(--cr-ink);
+}
+
+.cr-rail.open {
+  transform: translateX(0);
+}
+
+.cr-rail-header {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 16px 12px;
+  border-bottom: 1px solid var(--cr-border);
+  background: var(--cr-surface);
+}
+
+.cr-rail-title {
+  font-size: 14px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.cr-rail-count {
+  font-size: 12px;
+  color: var(--cr-muted);
+  flex: 1 1 auto;
+}
+
+.cr-export-btn {
+  flex: 0 0 auto;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--cr-accent);
+  background: var(--cr-accent);
+  color: var(--cr-accent-ink);
+  cursor: pointer;
+}
+
+.cr-export-btn:hover {
+  opacity: 0.9;
+}
+
+.cr-rail-close {
+  flex: 0 0 auto;
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  border: 1px solid var(--cr-border);
+  background: var(--cr-surface);
+  color: var(--cr-muted);
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 1;
+}
+
+.cr-rail-close:hover {
+  border-color: var(--cr-accent);
+  color: var(--cr-accent);
+}
+
+.cr-rail-list {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cr-rail-empty {
+  color: var(--cr-muted);
+  font-size: 13px;
+  text-align: center;
+  padding: 24px 8px;
+}
+
+/* ---- comment card ------------------------------------------------------ */
+
+.cr-card {
+  background: var(--cr-surface);
+  border: 1px solid var(--cr-border);
+  border-radius: var(--cr-radius);
+  padding: 12px 14px;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.cr-card.cr-focus {
+  border-color: var(--cr-accent);
+  box-shadow: 0 0 0 3px rgba(217, 119, 87, 0.22);
+}
+
+.cr-card.resolved {
+  opacity: 0.72;
+}
+
+.cr-card-head {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+}
+
+.cr-card-author {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.cr-card-role {
+  font-size: 11px;
+  color: var(--cr-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.cr-card-time {
+  font-size: 11px;
+  color: var(--cr-muted);
+  margin-left: auto;
+}
+
+.cr-status-pill {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: var(--cr-highlight);
+  color: var(--cr-accent);
+  border: 1px solid rgba(217, 119, 87, 0.35);
+}
+
+.cr-status-pill.resolved {
+  background: transparent;
+  color: var(--cr-muted);
+  border-color: var(--cr-border);
+}
+
+.cr-card-anchor-hint {
+  font-size: 11px;
+  color: var(--cr-muted);
+  margin-bottom: 6px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.cr-card-anchor-hint:hover {
+  color: var(--cr-accent);
+}
+
+.cr-card-body {
+  font-size: 13px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
+  margin-bottom: 8px;
+}
+
+.cr-card-replies {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 8px 0;
+  padding-left: 10px;
+  border-left: 2px solid var(--cr-border);
+}
+
+.cr-reply {
+  padding-bottom: 8px;
+  border-bottom: 1px dashed var(--cr-border);
+}
+
+.cr-reply:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.cr-reply-head {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-size: 12px;
+}
+
+.cr-reply-del {
+  border: none;
+  background: transparent;
+  color: var(--cr-muted);
+  font-size: 11px;
+  line-height: 1;
+  padding: 0 2px;
+  cursor: pointer;
+}
+
+.cr-reply-del:hover {
+  color: var(--cr-danger);
+}
+
+.cr-reply-author {
+  font-weight: 700;
+}
+
+.cr-reply-role {
+  font-size: 10px;
+  color: var(--cr-muted);
+  text-transform: uppercase;
+}
+
+.cr-reply-time {
+  font-size: 10px;
+  color: var(--cr-muted);
+  margin-left: auto;
+}
+
+.cr-reply-body {
+  font-size: 12.5px;
+  line-height: 1.45;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.cr-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.cr-action-btn {
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--cr-border);
+  background: var(--cr-bg);
+  color: var(--cr-ink);
+  cursor: pointer;
+}
+
+.cr-action-btn:hover {
+  border-color: var(--cr-accent);
+  color: var(--cr-accent);
+}
+
+.cr-action-btn.danger:hover {
+  border-color: var(--cr-danger);
+  color: var(--cr-danger);
+}
+
+.cr-inline-form {
+  margin-top: 8px;
+  display: none;
+}
+
+.cr-inline-form.open {
+  display: block;
+}
+
+/* Reviewer reply thread's own inline form — same shape as the edit form,
+   with a hairline separator when it follows existing replies/body content. */
+.cr-inline-form.cr-reply-form {
+  padding-top: 8px;
+  border-top: 1px solid var(--cr-border);
+}
+
+.cr-inline-form textarea {
+  width: 100%;
+  min-height: 54px;
+  resize: vertical;
+  padding: 7px 9px;
+  border-radius: 8px;
+  border: 1px solid var(--cr-border);
+  background: var(--cr-bg);
+  color: var(--cr-ink);
+  font-size: 12.5px;
+  line-height: 1.4;
+}
+
+.cr-inline-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.cr-inline-err {
+  color: var(--cr-danger);
+  font-size: 11px;
+  margin-top: 4px;
+  display: none;
+}
+
+.cr-inline-err.show {
+  display: block;
+}
+
+/* ---- new-comment composer (floating, near the anchor) ------------------ */
+
+.cr-composer {
+  position: absolute;
+  z-index: 2147482950;
+  width: 240px;
+  background: var(--cr-ink);
+  color: var(--cr-bg);
+  border-radius: var(--cr-radius);
+  box-shadow: var(--cr-shadow);
+  padding: 10px;
+  display: none;
+}
+
+.cr-composer.open {
+  display: block;
+}
+
+.cr-composer textarea {
+  width: 100%;
+  min-height: 60px;
+  resize: vertical;
+  padding: 7px 9px;
+  border-radius: 8px;
+  border: none;
+  background: var(--cr-bg);
+  color: var(--cr-ink);
+  font-size: 12.5px;
+  line-height: 1.4;
+}
+
+.cr-composer-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.cr-composer button {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 11px;
+  border-radius: 6px;
+  border: 1px solid rgba(250, 249, 245, 0.3);
+  background: rgba(250, 249, 245, 0.08);
+  color: var(--cr-bg);
+  cursor: pointer;
+}
+
+.cr-composer .cr-composer-save {
+  background: var(--cr-accent);
+  border-color: var(--cr-accent);
+  color: var(--cr-accent-ink);
+}
+
+.cr-composer-err {
+  color: #e5896f;
+  font-size: 11px;
+  margin-top: 6px;
+  display: none;
+}
+
+.cr-composer-err.show {
+  display: block;
+}
+
+/* ---- author-name modal -------------------------------------------------- */
+
+.cr-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483600;
+  background: rgba(20, 20, 19, 0.55);
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.cr-modal-overlay.open {
+  display: flex;
+}
+
+.cr-modal {
+  width: min(320px, 90vw);
+  background: var(--cr-surface);
+  border-radius: var(--cr-radius);
+  box-shadow: var(--cr-shadow);
+  padding: 20px;
+  color: var(--cr-ink);
+}
+
+.cr-modal-title {
+  font-size: 15px;
+  font-weight: 700;
+  margin: 0 0 4px;
+}
+
+.cr-modal-sub {
+  font-size: 12.5px;
+  color: var(--cr-muted);
+  margin: 0 0 12px;
+}
+
+.cr-modal input[type="text"] {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--cr-border);
+  background: var(--cr-bg);
+  color: var(--cr-ink);
+  font-size: 13px;
+}
+
+.cr-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.cr-modal-actions button {
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--cr-border);
+  background: var(--cr-bg);
+  color: var(--cr-ink);
+  cursor: pointer;
+}
+
+.cr-modal-actions .cr-modal-save {
+  background: var(--cr-accent);
+  border-color: var(--cr-accent);
+  color: var(--cr-accent-ink);
+}
+
+/* ---- toast (markdown export clipboard confirmation) --------------------- */
+
+.cr-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 28px;
+  z-index: 2147483600;
+  transform: translateX(-50%) translateY(8px);
+  background: var(--cr-ink);
+  color: var(--cr-bg);
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 9px 16px;
+  border-radius: 999px;
+  box-shadow: var(--cr-shadow);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.16s ease, transform 0.16s ease;
+}
+
+.cr-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ---- doc markers (element badge / text highlight / image pin) ---------- */
+/* All positioned in page (document) coordinates by annotate.js, appended
+   into one absolute, zero-size overlay layer so they never affect layout
+   and never intercept clicks except on the marker itself. */
+
+.cr-marker-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  overflow: visible;
+  z-index: 2147482800;
+}
+
+/* Highlight-mode hover preview: one reusable box, repositioned over the
+   element under the cursor. Sits behind every real marker (it is always
+   re-seated as the layer's first child on render) and never intercepts
+   clicks or elementFromPoint checks. */
+.cr-hover-box {
+  position: absolute;
+  box-sizing: border-box;
+  border: 2px solid var(--cr-accent);
+  background: rgba(217, 119, 87, 0.08);
+  border-radius: 4px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.06s ease;
+}
+
+.cr-hover-box.show {
+  opacity: 1;
+}
+
+/* Legacy corner-dot pill — still used as the renderTextHighlight fallback
+   when a text anchor's range can no longer be resolved (host content
+   shifted), so it stays defined even though committed `element` anchors now
+   render as .cr-mark-box below. */
+.cr-mark-element {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  min-width: 20px;
+  height: 20px;
+  padding: 0 4px;
+  box-sizing: border-box;
+  border-radius: 999px;
+  background: var(--cr-accent);
+  color: var(--cr-accent-ink);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 18px;
+  text-align: center;
+  border: 2px solid var(--cr-surface);
+  box-shadow: 0 2px 8px rgba(20, 20, 19, 0.3);
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.cr-mark-element.resolved {
+  background: var(--cr-muted);
+}
+
+/* Committed `element` (Highlight-mode) comments: a box over the element's
+   full rect — faint fill + outline so the underlying text stays readable —
+   plus a small numbered badge pinned to its top-left corner. */
+.cr-mark-box {
+  position: absolute;
+  box-sizing: border-box;
+  border: 2px solid var(--cr-accent);
+  background: rgba(217, 119, 87, 0.12);
+  border-radius: 4px;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.cr-mark-box.resolved {
+  border-color: var(--cr-muted);
+  background: rgba(115, 114, 108, 0.1);
+}
+
+.cr-mark-box-badge {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  min-width: 20px;
+  height: 20px;
+  padding: 0 4px;
+  box-sizing: border-box;
+  border-radius: 999px;
+  background: var(--cr-accent);
+  color: var(--cr-accent-ink);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 18px;
+  text-align: center;
+  border: 2px solid var(--cr-surface);
+  box-shadow: 0 2px 8px rgba(20, 20, 19, 0.3);
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.cr-mark-box-badge.resolved {
+  background: var(--cr-muted);
+}
+
+/* Free-pin / image markers: a map-pin teardrop whose TIP (not its center)
+   lands on the exact x/y point — annotate.js sets left/top to that point
+   untouched; this transform does the offsetting. Visually distinct from
+   the Highlight box above (rounded pill + rect vs. a pin with a point). */
+.cr-mark-pin {
+  position: absolute;
+  transform: translate(-50%, -100%);
+  width: 26px;
+  height: 34px;
+  box-sizing: border-box;
+  color: var(--cr-accent-ink);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 26px;
+  text-align: center;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.cr-mark-pin::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--cr-accent);
+  border: 2px solid var(--cr-surface);
+  box-shadow: 0 2px 8px rgba(20, 20, 19, 0.35);
+}
+
+.cr-mark-pin::after {
+  content: '';
+  position: absolute;
+  top: 19px;
+  left: 50%;
+  width: 0;
+  height: 0;
+  transform: translateX(-50%);
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 11px solid var(--cr-accent);
+}
+
+.cr-mark-pin.resolved::before {
+  background: var(--cr-muted);
+}
+
+.cr-mark-pin.resolved::after {
+  border-top-color: var(--cr-muted);
+}
+
+.cr-mark-text {
+  position: absolute;
+  background: var(--cr-highlight);
+  border-bottom: 2px solid var(--cr-accent);
+  opacity: 0.75;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.cr-mark-text.resolved {
+  background: transparent;
+  border-bottom-color: var(--cr-border);
+  opacity: 0.6;
+}
+
+.cr-mark-flash {
+  outline: 3px solid var(--cr-accent) !important;
+  outline-offset: 2px;
+  transition: outline-color 0.6s ease;
+}
+
+.cr-mark-flash.cr-flash-fade {
+  outline-color: rgba(217, 119, 87, 0);
+}
+
+@media (max-width: 560px) {
+  .cr-rail {
+    width: 100vw;
+  }
+
+  .cr-toggles {
+    right: 12px;
+    bottom: 12px;
+  }
+}
