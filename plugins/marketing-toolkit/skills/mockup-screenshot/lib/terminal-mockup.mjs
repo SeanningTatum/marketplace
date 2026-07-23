@@ -88,6 +88,10 @@ function runCLI() {
     );
     process.exit(1);
   }
+  if (outIdx >= 0 && !outPath) {
+    console.error("-o/--out given but no path followed it.");
+    process.exit(1);
+  }
 
   const spec = JSON.parse(readFileSync(specPath, "utf8"));
   const svg = buildTerminalSVG(spec);
