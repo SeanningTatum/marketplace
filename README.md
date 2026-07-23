@@ -2,8 +2,8 @@
 
 **Skills for [Claude Code](https://claude.com/claude-code) that ship code, not just suggest it** — scaffold an app, get a browser-verified and AI-reviewed PR open, triage feedback, cut a branded release, and round-trip client comments. Sean's personal, actively-developed plugin marketplace.
 
-![Plugins](https://img.shields.io/badge/plugins-2-blue)
-![Skills](https://img.shields.io/badge/skills-6-brightgreen)
+![Plugins](https://img.shields.io/badge/plugins-3-blue)
+![Skills](https://img.shields.io/badge/skills-7-brightgreen)
 ![Marketplace](https://img.shields.io/badge/claude--code-marketplace-orange)
 
 ## Install
@@ -12,6 +12,7 @@
 /plugin marketplace add SeanningTatum/marketplace
 /plugin install engineering-toolkit@sean-skills
 /plugin install automation-toolkit@sean-skills
+/plugin install marketing-toolkit@sean-skills
 ```
 
 ## Plugins
@@ -20,6 +21,7 @@
 | --- | --- |
 | [`engineering-toolkit`](./plugins/engineering-toolkit/README.md) | The ship-it loop, end to end — scaffold, verify, review, resolve, release. |
 | `automation-toolkit` | Skills for building and wiring up automations. |
+| [`marketing-toolkit`](./plugins/marketing-toolkit/README.md) | The last-mile polish — make what you shipped legible and marketable. |
 
 ## Skills at a glance
 
@@ -33,6 +35,7 @@ Every skill has a README with its **what / why / how** and a visual of the outpu
 | [`pr-format`](./plugins/engineering-toolkit/skills/pr-format/README.md) | A PR description a reviewer trusts on the first read, every time. |
 | [`release`](./plugins/engineering-toolkit/skills/release/README.md) | Ship notes that read like a launch, not a changelog nobody opens. |
 | [`client-review`](./plugins/engineering-toolkit/skills/client-review/README.md) | Let a non-technical client comment on your doc without a server, an account, or a login. |
+| [`mockup-screenshot`](./plugins/marketing-toolkit/skills/mockup-screenshot/README.md) | Give a README a visual even when there's no live demo to screenshot. |
 
 ## Develop
 

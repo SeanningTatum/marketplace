@@ -20,6 +20,13 @@
       "description": "Skills for building and wiring up automations.",
       "category": "automation",
       "tags": ["automation", "integrations"]
+    },
+    {
+      "name": "marketing-toolkit",
+      "source": "./plugins/marketing-toolkit",
+      "description": "Skills for making generated docs and deliverables read as marketable, not just documented.",
+      "category": "productivity",
+      "tags": ["docs", "marketing", "readme"]
     }
   ]
 }
