@@ -25,13 +25,30 @@ A README with no visual reads as unfinished or unverified, but plenty of real sk
 
 ## How
 
+### Terminal transcript (parameterized)
+
 ```bash
 node ${CLAUDE_PLUGIN_ROOT}/skills/mockup-screenshot/lib/terminal-mockup.mjs <spec.json> -o example-output.svg
 ```
 
-See `examples/sample.spec.json` for the spec format (title, width, colored/bold line spans). For a browser mockup, copy `lib/browser-mockup-template.svg` and edit the content region directly.
+See `examples/sample.spec.json` for the spec format (title, width, colored/bold line spans).
 
-Always render before treating it as done — headless Chrome is the fastest check:
+### Browser window (freehand)
+
+Copy `lib/browser-mockup-template.svg`, keep the chrome block as-is (traffic
+lights, address bar, watermark), and replace the placeholder content with
+real `<text>`/`<rect>`/`<circle>` primitives — a card, a table, a button, not
+abstract shapes. `examples/sample-browser-mockup.svg` is a worked example
+(a billing settings page: plan card, invoice table, status pills) showing the
+pattern:
+
+![Browser mockup example](./examples/sample-browser-mockup.svg)
+
+*A filled-in `browser-mockup-template.svg` — same chrome block, hand-drawn content.*
+
+### Verify
+
+Always render before treating either mode as done — headless Chrome is the fastest check:
 
 ```bash
 "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
