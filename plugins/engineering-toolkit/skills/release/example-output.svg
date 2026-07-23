@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="410" viewBox="0 0 900 410" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">
+  <style>.mono{font-size:13px;white-space:pre}</style>
+  <rect width="900" height="410" rx="10" fill="#1e2127"/>
+  <path d="M0 10a10 10 0 0 1 10-10h880a10 10 0 0 1 10 10v26H0z" fill="#2c313a"/>
+  <circle cx="20" cy="18" r="6" fill="#ff5f57"/>
+  <circle cx="40" cy="18" r="6" fill="#febc2e"/>
+  <circle cx="60" cy="18" r="6" fill="#28c840"/>
+  <text x="450" y="22" text-anchor="middle" fill="#5c6370" font-size="12">/release — squash-merge → version → notes → publish</text>
+  <text x="884" y="22" text-anchor="end" fill="#5c6370" font-size="10" font-style="italic">example output</text>
+  <text x="20" y="67.0" xml:space="preserve" class="mono"><tspan fill="#c678dd">$ </tspan><tspan fill="#d8dee9">/release </tspan><tspan fill="#5c6370">ship PR #24</tspan></text>
+  <text x="20" y="87.0" xml:space="preserve" class="mono"><tspan fill="#98c379">✓ CI green · review threads resolved · squash-merged #24 → a41c9e0</tspan></text>
+  <text x="20" y="107.0" xml:space="preserve" class="mono"><tspan fill="#98c379">✓ Version: v1.3.0 </tspan><tspan fill="#5c6370">(minor — new capability, no breaking surface)</tspan></text>
+  <text x="20" y="127.0" xml:space="preserve" class="mono"><tspan fill="#d8dee9"></tspan></text>
+  <text x="20" y="147.0" xml:space="preserve" class="mono"><tspan fill="#d8dee9" font-weight="bold">  v1.3.0 — The PR That Reviews Itself</tspan></text>
+  <text x="20" y="167.0" xml:space="preserve" class="mono"><tspan fill="#d8dee9">  ## 🤖 Ship pre-reviewed, every time</tspan></text>
+  <text x="20" y="187.0" xml:space="preserve" class="mono"><tspan fill="#d8dee9">  **Every PR now lands already reviewed — findings triaged and fixed</tspan></text>
+  <text x="20" y="207.0" xml:space="preserve" class="mono"><tspan fill="#d8dee9">  before a human ever opens the diff.**</tspan></text>
+  <text x="20" y="227.0" xml:space="preserve" class="mono"><tspan fill="#d8dee9">  ### ✨ What's new</tspan></text>
+  <text x="20" y="247.0" xml:space="preserve" class="mono"><tspan fill="#d8dee9">  - </tspan><tspan fill="#d8dee9" font-weight="bold">Pre-PR review pass</tspan><tspan fill="#d8dee9"> — Greptile triages P1/P2/P3 before the PR exists</tspan></text>
+  <text x="20" y="267.0" xml:space="preserve" class="mono"><tspan fill="#d8dee9">  - </tspan><tspan fill="#d8dee9" font-weight="bold">Browser-verified changes</tspan><tspan fill="#d8dee9"> — 3 independent Playwright runs must agree</tspan></text>
+  <text x="20" y="287.0" xml:space="preserve" class="mono"><tspan fill="#d8dee9">  ### For the agent-first crowd</tspan></text>
+  <text x="20" y="307.0" xml:space="preserve" class="mono"><tspan fill="#d8dee9">  - </tspan><tspan fill="#d8dee9">.brain/ progress log now records every release with tag + squash SHA</tspan></text>
+  <text x="20" y="327.0" xml:space="preserve" class="mono"><tspan fill="#5c6370">  **Full diff**: https://github.com/acme/app/compare/v1.2.0...v1.3.0</tspan></text>
+  <text x="20" y="347.0" xml:space="preserve" class="mono"><tspan fill="#d8dee9"></tspan></text>
+  <text x="20" y="367.0" xml:space="preserve" class="mono"><tspan fill="#e5c07b">? </tspan><tspan fill="#d8dee9">Publish this release? (creates tag, notifies watchers) </tspan><tspan fill="#98c379">→ confirmed</tspan></text>
+  <text x="20" y="387.0" xml:space="preserve" class="mono"><tspan fill="#98c379">✓ Released → </tspan><tspan fill="#61afef">https://github.com/acme/app/releases/tag/v1.3.0</tspan></text>
+</svg>

@@ -1,0 +1,24 @@
+{
+  "title": "/your-skill — one-line description of the flow",
+  "width": 900,
+  "lines": [
+    [{ "t": "$ ", "c": "magenta" }, { "t": "/your-skill " }, { "t": "some argument", "c": "dim" }],
+    "",
+    [{ "t": "✓ Step one completed", "c": "green" }],
+    [{ "t": "✓ Step two completed — ", "c": "green" }, { "t": "3 items", "b": true }],
+    "",
+    [{ "t": "  #  finding                     file:line        pri  action", "b": true }],
+    [
+      { "t": "  1  something risky            auth.ts:12       " },
+      { "t": "P1", "c": "red" },
+      { "t": "   escalate to human" }
+    ],
+    [
+      { "t": "  2  something mechanical       lib/http.ts:40   " },
+      { "t": "P3", "c": "green" },
+      { "t": "   auto-fix silently" }
+    ],
+    "",
+    [{ "t": "✓ Done → ", "c": "green" }, { "t": "https://github.com/acme/app/pull/1", "c": "blue" }]
+  ]
+}

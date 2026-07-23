@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="540" viewBox="0 0 900 540" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <!-- Browser chrome — keep this block as-is, just edit the address bar text -->
+  <rect width="900" height="540" rx="10" fill="#e8eaed"/>
+  <path d="M0 10a10 10 0 0 1 10-10h880a10 10 0 0 1 10 10v36H0z" fill="#dee1e6"/>
+  <circle cx="20" cy="23" r="6" fill="#ff5f57"/>
+  <circle cx="40" cy="23" r="6" fill="#febc2e"/>
+  <circle cx="60" cy="23" r="6" fill="#28c840"/>
+  <rect x="84" y="10" width="620" height="26" rx="13" fill="#ffffff"/>
+  <text x="100" y="27" font-size="12" fill="#5f6368">https://example.com/replace-me</text>
+  <text x="884" y="27" text-anchor="end" font-size="10" font-style="italic" fill="#80868b">example output</text>
+
+  <!-- Page canvas — resize/reposition freely, this is just a light backdrop -->
+  <rect x="0" y="46" width="900" height="494" fill="#fbf8f3"/>
+
+  <!--
+    Content region below is a placeholder. Delete it and draw the actual
+    mockup content with plain SVG primitives:
+      <text>            for copy — pick real font-size (13–26px), real fill color
+      <rect rx="6">      for cards/panels/buttons
+      <circle>           for avatars, status dots, pins
+      <line>              for dividers
+    Keep it information-dense and labeled (like a real UI), not abstract
+    shapes — the reader should recognize what feature is being shown.
+  -->
+  <text x="48" y="120" font-size="26" font-weight="bold" fill="#2b2620">Replace this placeholder content</text>
+  <text x="48" y="148" font-size="13" fill="#8a8177">Draw the actual mockup here — cards, text, form fields, whatever the real UI shows.</text>
+</svg>
