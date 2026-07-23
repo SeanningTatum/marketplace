@@ -42,7 +42,7 @@ It then walks the playbook in order. You stay in the loop at the decision points
 
 **Prerequisites it looks for and adapts to:**
 
-- Terminal-recording tooling (`vhs`, `freeze`, `agg`, `asciinema`) for the demo GIF — falls back to rendering the demo with the [`hyperframes`](https://claude.com/claude-code) skill (deterministic, no capture step) if none is installed.
+- Terminal-recording tooling (`vhs`, `freeze`, `agg`, `asciinema`) for the demo GIF — falls back to rendering the demo with the `hyperframes` skill (deterministic, no capture step) if none is installed.
 - A live browser UI → captures it via `claude-in-chrome` or headless Chrome.
 - A review-first PR skill like [`create-pr-with-review`](../../../engineering-toolkit/skills/create-pr-with-review/README.md) — used for the final step so the README lands as a reviewed second draft, not a first one.
 

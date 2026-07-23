@@ -9,7 +9,7 @@ user-invocable: true
 Drop this file's body as your first message to Claude Code in a new repo
 (or save it as `.claude/skills/readme-marketing-rewrite/SKILL.md` if this
 org uses skill directories). It reproduces the exact playbook used to turn
-brain-axi's README into a plain-language, marketing-grade page — real
+a real project's README into a plain-language, marketing-grade page — real
 screenshots of every surface (terminal, browser UI, annotation flow), a
 demo GIF, and an accurate install story — PR'd through review.
 
