@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="390" viewBox="0 0 940 390" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">
+  <style>.mono{font-size:13px;white-space:pre}</style>
+  <rect width="940" height="390" rx="10" fill="#1e2127"/>
+  <path d="M0 10a10 10 0 0 1 10-10h920a10 10 0 0 1 10 10v26H0z" fill="#2c313a"/>
+  <circle cx="20" cy="18" r="6" fill="#ff5f57"/>
+  <circle cx="40" cy="18" r="6" fill="#febc2e"/>
+  <circle cx="60" cy="18" r="6" fill="#28c840"/>
+  <text x="470" y="22" text-anchor="middle" fill="#5c6370" font-size="12">/marketing-toolkit:readme-marketing-rewrite — scout, delegate, verify, PR</text>
+  <text x="924" y="22" text-anchor="end" fill="#5c6370" font-size="10" font-style="italic">example output</text>
+  <text x="20" y="67.0" xml:space="preserve" class="mono"><tspan fill="#c678dd">$ </tspan><tspan fill="#d8dee9">/marketing-toolkit:readme-marketing-rewrite</tspan><tspan fill="#5c6370">  # rewrite our README, show it off, PR it</tspan></text>
+  <text x="20" y="87.0" xml:space="preserve" class="mono"><tspan fill="#d8dee9"></tspan></text>
+  <text x="20" y="107.0" xml:space="preserve" class="mono"><tspan fill="#56b6c2" font-weight="bold">① Scout first (inline)</tspan></text>
+  <text x="20" y="127.0" xml:space="preserve" class="mono"><tspan fill="#98c379">  ✓ read README + captured real </tspan><tspan fill="#e5c07b">cli --help</tspan><tspan fill="#98c379"> output → scratch/</tspan></text>
+  <text x="20" y="147.0" xml:space="preserve" class="mono"><tspan fill="#98c379">  ✓ found </tspan><tspan fill="#e5c07b">.brain/features/*/screenshots/</tspan><tspan fill="#98c379"> — reuse, don't recapture</tspan></text>
+  <text x="20" y="167.0" xml:space="preserve" class="mono"><tspan fill="#d8dee9"></tspan></text>
+  <text x="20" y="187.0" xml:space="preserve" class="mono"><tspan fill="#56b6c2" font-weight="bold">② Delegate 2 fresh agents</tspan><tspan fill="#5c6370">  (one message, run concurrent)</tspan></text>
+  <text x="20" y="207.0" xml:space="preserve" class="mono"><tspan fill="#61afef">  → Agent A </tspan><tspan fill="#d8dee9" font-weight="bold">copywriter</tspan><tspan fill="#d8dee9">   plain voice, every claim verified vs capture</tspan></text>
+  <text x="20" y="227.0" xml:space="preserve" class="mono"><tspan fill="#61afef">  → Agent B </tspan><tspan fill="#d8dee9" font-weight="bold">visual   </tspan><tspan fill="#d8dee9">   demo.gif + a still of every surface</tspan></text>
+  <text x="20" y="247.0" xml:space="preserve" class="mono"><tspan fill="#d8dee9"></tspan></text>
+  <text x="20" y="267.0" xml:space="preserve" class="mono"><tspan fill="#56b6c2" font-weight="bold">③ Verify visually</tspan><tspan fill="#5c6370">  read image bytes, extract a GIF frame</tspan></text>
+  <text x="20" y="287.0" xml:space="preserve" class="mono"><tspan fill="#98c379">  ✓ assets render clean   ✓ flags match output underneath</tspan></text>
+  <text x="20" y="307.0" xml:space="preserve" class="mono"><tspan fill="#d8dee9"></tspan></text>
+  <text x="20" y="327.0" xml:space="preserve" class="mono"><tspan fill="#56b6c2" font-weight="bold">④ Ship</tspan><tspan fill="#5c6370">  squash-merge trap checked → reviewed PR</tspan></text>
+  <text x="20" y="347.0" xml:space="preserve" class="mono"><tspan fill="#98c379">  ✓ </tspan><tspan fill="#e5c07b">git diff main...branch --stat</tspan><tspan fill="#98c379"> = only README + docs/assets</tspan></text>
+  <text x="20" y="367.0" xml:space="preserve" class="mono"><tspan fill="#98c379">  ✓ opened via /create-pr-with-review</tspan></text>
+</svg>
