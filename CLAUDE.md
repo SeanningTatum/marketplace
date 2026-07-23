@@ -79,9 +79,13 @@ claude --plugin-dir ./plugins/engineering-toolkit
 
 1. `plugins/<name>/.claude-plugin/plugin.json` with `name` + `description`.
 2. Components at the plugin root (`skills/`, `agents/`, `hooks/hooks.json`, `.mcp.json`).
-3. Add a `plugins[]` entry to `.claude-plugin/marketplace.json` with a
-   `"./plugins/<name>"` source.
-4. `claude plugin validate .`, then commit.
+3. `plugins/<name>/README.md` — a pitch, not just a list: a one-line hook, an
+   install snippet, and a table of the plugin's skills linking each skill's
+   own README (see "Documenting a skill" below).
+4. Add a `plugins[]` entry to `.claude-plugin/marketplace.json` with a
+   `"./plugins/<name>"` source, and add a row for the plugin to the root
+   `README.md`'s plugins table.
+5. `claude plugin validate .`, then commit.
 
 ## Adding a skill
 
@@ -95,3 +99,40 @@ and `../` paths break.
 
 The `plugins/*/skills/example-skill/` directories are placeholders; replace or
 delete them as real skills land.
+
+## Documenting a skill (required, every skill)
+
+This marketplace is a distribution surface other people browse and install
+from — every skill needs a README that sells it, not just a `SKILL.md` that
+instructs an agent. **This is a hard convention, not a suggestion**: no skill
+is done until it has this.
+
+1. `plugins/<plugin>/skills/<skill-name>/README.md` with, in this order:
+   - A one-line **bolded hook** up top stating the outcome, not the mechanism
+     (e.g. "A reviewer should never have to open your diff just to figure out
+     why a PR exists" — not "Formats PR descriptions").
+   - A `shields.io` badge or two calling out the skill's core mechanic (see
+     existing skill READMEs for the pattern).
+   - `## What` / `## Why` / `## How` sections — what it does, why it exists
+     (the problem it removes), how to invoke it (prereqs, exact command,
+     what you'll be prompted for).
+   - Cross-links to related skills where relevant.
+2. An **`example-output.svg`** (or `.png`) embedded right under the hook line,
+   captioned as illustrative if it's a mockup (see below). A skill README with
+   no visual reads as unfinished.
+3. Add the skill as a row to its plugin's `README.md` table (one-liner framed
+   as *why you'd reach for it*) and to the root `README.md`'s skills-at-a-glance
+   table.
+
+**Screenshots — real first, mockup as fallback:**
+- If the skill has an actual capturable output (a running app, a deployed
+  page), capture the real thing.
+- If it doesn't (no runtime in this repo, needs cloud auth/billing you don't
+  have, produces output only mid-workflow) — use
+  `/marketing-toolkit:mockup-screenshot` to generate a labeled, honest
+  mockup instead of shipping no visual or a fake-passing-as-real one. Every
+  mockup must keep its "example output" watermark, and the README must
+  caption it as illustrative.
+
+Run `claude plugin validate .` after adding a skill — it also catches
+malformed `SKILL.md` frontmatter, not just missing docs.
