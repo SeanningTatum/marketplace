@@ -1,6 +1,9 @@
 # engineering-toolkit
 
-General software engineering skills and workflows for [Claude Code](https://claude.com/claude-code) — the ship-it loop: scaffold an app, verify and review changes, open clean PRs, resolve feedback, cut releases, and round-trip client feedback.
+**Ship code like a senior engineer reviewed it before you asked** — six skills covering the full loop from scaffold to release, for [Claude Code](https://claude.com/claude-code).
+
+![Skills](https://img.shields.io/badge/skills-6-brightgreen)
+![Stack](https://img.shields.io/badge/uses-gh%20%2B%20Greptile-blue)
 
 ## Install
 

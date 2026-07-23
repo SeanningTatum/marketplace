@@ -1,7 +1,10 @@
 # marketplace
 
-Sean's personal [Claude Code](https://claude.com/claude-code) plugin marketplace —
-skills for SaaS engineering and automations.
+**Skills for [Claude Code](https://claude.com/claude-code) that ship code, not just suggest it** — scaffold an app, get a browser-verified and AI-reviewed PR open, triage feedback, cut a branded release, and round-trip client comments. Sean's personal, actively-developed plugin marketplace.
+
+![Plugins](https://img.shields.io/badge/plugins-2-blue)
+![Skills](https://img.shields.io/badge/skills-6-brightgreen)
+![Marketplace](https://img.shields.io/badge/claude--code-marketplace-orange)
 
 ## Install
 
@@ -13,23 +16,23 @@ skills for SaaS engineering and automations.
 
 ## Plugins
 
-| Plugin | Description |
+| Plugin | What you get |
 | --- | --- |
-| [`engineering-toolkit`](./plugins/engineering-toolkit/README.md) | The ship-it loop: scaffold apps, pre-reviewed PRs, comment triage, releases, client feedback round-trips. |
+| [`engineering-toolkit`](./plugins/engineering-toolkit/README.md) | The ship-it loop, end to end — scaffold, verify, review, resolve, release. |
 | `automation-toolkit` | Skills for building and wiring up automations. |
 
 ## Skills at a glance
 
 Every skill has a README with its **what / why / how** and a visual of the output:
 
-| Skill | One-liner |
+| Skill | Why you'd reach for it |
 | --- | --- |
-| [`new-app`](./plugins/engineering-toolkit/skills/new-app/README.md) | New SaaS app from the Cloudflare starter template in one command. |
-| [`create-pr-with-review`](./plugins/engineering-toolkit/skills/create-pr-with-review/README.md) | PRs that are browser-verified, test-locked, and AI-reviewed before they exist. |
-| [`resolve-comments`](./plugins/engineering-toolkit/skills/resolve-comments/README.md) | P1/P2/P3 triage of review comments — auto-fix the safe, escalate the risky. |
-| [`pr-format`](./plugins/engineering-toolkit/skills/pr-format/README.md) | PR descriptions with a fixed, reviewer-first structure. |
-| [`release`](./plugins/engineering-toolkit/skills/release/README.md) | Squash-merge → semver tag → branded GitHub release notes. |
-| [`client-review`](./plugins/engineering-toolkit/skills/client-review/README.md) | Offline commentable HTML artifacts for clients, comments read back as markdown. |
+| [`new-app`](./plugins/engineering-toolkit/skills/new-app/README.md) | New SaaS app, live repo to cloned wizard, in one command instead of an afternoon of setup. |
+| [`create-pr-with-review`](./plugins/engineering-toolkit/skills/create-pr-with-review/README.md) | Open PRs that are already proven to work and already reviewed — reviewers see a second draft, not a first one. |
+| [`resolve-comments`](./plugins/engineering-toolkit/skills/resolve-comments/README.md) | Clear the easy 80% of review comments automatically; the risky 20% still needs you. |
+| [`pr-format`](./plugins/engineering-toolkit/skills/pr-format/README.md) | A PR description a reviewer trusts on the first read, every time. |
+| [`release`](./plugins/engineering-toolkit/skills/release/README.md) | Ship notes that read like a launch, not a changelog nobody opens. |
+| [`client-review`](./plugins/engineering-toolkit/skills/client-review/README.md) | Let a non-technical client comment on your doc without a server, an account, or a login. |
 
 ## Develop
 

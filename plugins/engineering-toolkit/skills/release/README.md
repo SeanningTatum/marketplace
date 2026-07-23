@@ -2,6 +2,10 @@
 
 > `/engineering-toolkit:release` — part of the [`engineering-toolkit`](../../README.md) plugin
 
+![Order](https://img.shields.io/badge/order-merge%20%E2%86%92%20version%20%E2%86%92%20notes%20%E2%86%92%20publish-blueviolet)
+
+**Release notes people actually read — a hook line, not a category name, and every claim traceable to the diff.**
+
 ![Example output](./example-output.svg)
 
 *Illustrative mockup of a typical run — your version, notes, and URLs will differ.*

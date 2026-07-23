@@ -2,6 +2,10 @@
 
 > `/engineering-toolkit:create-pr-with-review` — part of the [`engineering-toolkit`](../../README.md) plugin
 
+![Order](https://img.shields.io/badge/order-verify%20%E2%86%92%20review%20%E2%86%92%20resolve%20%E2%86%92%20PR-blueviolet)
+
+**The PR your reviewer sees has already been proven to work and already had its typos, null checks, and stray logs fixed — before they ever open the diff.**
+
 ![Example output](./example-output.svg)
 
 *Illustrative mockup of a typical run — your findings, paths, and URLs will differ.*

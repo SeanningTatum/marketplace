@@ -2,6 +2,10 @@
 
 > `/engineering-toolkit:pr-format` — part of the [`engineering-toolkit`](../../README.md) plugin
 
+![Sections](https://img.shields.io/badge/sections-7%2C%20always%20in%20order-blueviolet)
+
+**A reviewer should never have to open your diff just to figure out why a PR exists.**
+
 ![Example output](./example-output.svg)
 
 *Illustrative mockup of a generated PR body — content is derived from your actual diff.*

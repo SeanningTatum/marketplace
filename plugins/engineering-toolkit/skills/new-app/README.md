@@ -2,6 +2,10 @@
 
 > `/engineering-toolkit:new-app` — part of the [`engineering-toolkit`](../../README.md) plugin
 
+![Stack](https://img.shields.io/badge/stack-Workers%20%2B%20RRv7%20%2B%20D1%20%2B%20Better%20Auth-blueviolet)
+
+**A new SaaS app, live on GitHub with its cloud setup wizard queued up, in one command instead of an afternoon of boilerplate.**
+
 ![Example output](./example-output.svg)
 
 *Illustrative mockup of a typical run — your app name and repo will differ.*

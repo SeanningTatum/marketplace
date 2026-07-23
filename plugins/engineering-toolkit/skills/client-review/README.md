@@ -2,6 +2,10 @@
 
 > Part of the [`engineering-toolkit`](../../README.md) plugin — auto-invoked when you want a client to comment on a generated document
 
+![Offline](https://img.shields.io/badge/offline-no%20server%2C%20no%20account%2C%20no%20install-blueviolet)
+
+**Your client double-clicks a file, leaves comments like they would on a Google Doc, and you get their feedback back as markdown your agents can read — no account, no server, nothing to set up on their end.**
+
 ![Example output](./example-output.svg)
 
 *Illustrative mockup of the commentable artifact a client receives.*

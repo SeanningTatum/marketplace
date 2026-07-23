@@ -2,6 +2,10 @@
 
 > `/engineering-toolkit:resolve-comments` — part of the [`engineering-toolkit`](../../README.md) plugin
 
+![Ruleset](https://img.shields.io/badge/triage-P1%20%2F%20P2%20%2F%20P3-blueviolet)
+
+**Clears the typos, lint, and one-line fixes off your review thread automatically — and never touches anything that involves auth, money, or a judgment call.**
+
 ![Example output](./example-output.svg)
 
 *Illustrative mockup of a typical run — your comments, paths, and URLs will differ.*
