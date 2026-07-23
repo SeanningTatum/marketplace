@@ -2,6 +2,12 @@
 
 **Skills for [Claude Code](https://claude.com/claude-code) that ship code, not just suggest it** — scaffold an app, get a browser-verified and AI-reviewed PR open, triage feedback, cut a branded release, and round-trip client comments. Sean's personal, actively-developed plugin marketplace.
 
+<p align="center">
+  <img src="./docs/assets/demo.gif" alt="The engineering-toolkit ship-it loop: scaffold, build, browser-verified and AI-reviewed PR, triage comments, branded release" width="800">
+</p>
+
+<p align="center"><sub><em>The ship-it loop, one slash command per step. Illustrative walkthrough of real skills.</em></sub></p>
+
 ![Plugins](https://img.shields.io/badge/plugins-2-blue)
 ![Skills](https://img.shields.io/badge/skills-8-brightgreen)
 ![Marketplace](https://img.shields.io/badge/claude--code-marketplace-orange)
@@ -35,6 +41,18 @@ Every skill has a README with its **what / why / how** and a visual of the outpu
 | [`client-review`](./plugins/engineering-toolkit/skills/client-review/README.md) | Let a non-technical client comment on your doc without a server, an account, or a login. |
 | [`readme-marketing-rewrite`](./plugins/marketing-toolkit/skills/readme-marketing-rewrite/README.md) | Rewrite a whole README in plain, marketing-grade language with real screenshots of every surface, PR'd through review. |
 | [`mockup-screenshot`](./plugins/marketing-toolkit/skills/mockup-screenshot/README.md) | Give a README a visual even when there's no live demo to screenshot. |
+
+## What the output looks like
+
+Every skill ships a README with a visual of what it produces. A few of the surfaces:
+
+<p align="center">
+  <a href="./plugins/engineering-toolkit/skills/create-pr-with-review/README.md"><img src="./plugins/engineering-toolkit/skills/create-pr-with-review/example-output.svg" alt="create-pr-with-review example output" width="32%"></a>
+  <a href="./plugins/engineering-toolkit/skills/release/README.md"><img src="./plugins/engineering-toolkit/skills/release/example-output.svg" alt="release example output" width="32%"></a>
+  <a href="./plugins/engineering-toolkit/skills/client-review/README.md"><img src="./plugins/engineering-toolkit/skills/client-review/example-output.svg" alt="client-review example output" width="32%"></a>
+</p>
+
+<p align="center"><sub><em>Example outputs — <code>create-pr-with-review</code>, <code>release</code>, <code>client-review</code>. Each skill's README has its own.</em></sub></p>
 
 ## Develop
 
