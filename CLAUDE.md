@@ -28,7 +28,7 @@ Everything except `plugin.json` lives at the **plugin root**, never inside
 is the single most common structural mistake and it silently breaks loading.
 
 Marketplace `source` paths are relative to the **marketplace root** (repo root),
-not to `.claude-plugin/` — hence `"./plugins/saas-toolkit"`.
+not to `.claude-plugin/` — hence `"./plugins/engineering-toolkit"`.
 
 ## The two-manifest model
 
@@ -40,7 +40,7 @@ Two JSON files drive everything; keep them consistent:
   breaks every existing install (use a top-level `renames` map if you must —
   see the marketplace docs).
 - **`plugin.json`** — per-plugin identity. Its `name` is the **skill namespace**:
-  a skill `hello` in plugin `saas-toolkit` is invoked as `/saas-toolkit:hello`.
+  a skill `hello` in plugin `engineering-toolkit` is invoked as `/engineering-toolkit:hello`.
   Changing it changes every skill's invocation name.
 
 `name` values are kebab-case, lowercase, no spaces (the claude.ai sync rejects
@@ -65,13 +65,13 @@ check that exists here, so run it before committing:
 
 ```bash
 claude plugin validate .                       # validate the marketplace catalog
-claude plugin validate ./plugins/saas-toolkit  # validate one plugin (frontmatter, hooks, etc.)
+claude plugin validate ./plugins/engineering-toolkit  # validate one plugin (frontmatter, hooks, etc.)
 ```
 
 Test a plugin locally without installing:
 
 ```bash
-claude --plugin-dir ./plugins/saas-toolkit
+claude --plugin-dir ./plugins/engineering-toolkit
 /reload-plugins   # pick up edits without restarting
 ```
 
