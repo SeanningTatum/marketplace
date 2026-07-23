@@ -75,6 +75,21 @@ usefully. Instead:
    primitives — draw the actual UI (cards, form fields, avatars, whatever the
    real feature shows). Information-dense and labeled, not abstract shapes.
 
+`examples/sample-browser-mockup.svg` is a worked reference — a billing
+settings page built from the same template, showing the primitives pattern:
+
+- **Cards**: a `<rect rx="8">` panel with a `<text>` title + subtext inside it.
+- **Tables**: header row in `#6b7280`, `<line>` dividers between rows, cell
+  text left-aligned per column.
+- **Status pills**: a small `<rect rx="10">` (pill height ~20px) behind
+  centered `<text>` — pick a semantic color pair (e.g. `#dcfce7`/`#166534` for
+  "paid", `#fef3c7`/`#92400e` for "due").
+- **Buttons**: a filled `<rect rx="6">` with centered white bold `<text>`.
+
+Typical palette for this style: `#1a1a1a` (headings), `#6b7280` (secondary
+text), `#e5e7eb` (borders), `#2563eb` (primary action). Reuse it unless the
+real product has a distinct brand palette worth matching.
+
 ## Always verify by rendering
 
 SVG that looks right in source can clip or overflow when rendered. Before
