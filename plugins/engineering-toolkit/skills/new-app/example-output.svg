@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="350" viewBox="0 0 900 350" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">
+  <style>.mono{font-size:13px;white-space:pre}</style>
+  <rect width="900" height="350" rx="10" fill="#1e2127"/>
+  <path d="M0 10a10 10 0 0 1 10-10h880a10 10 0 0 1 10 10v26H0z" fill="#2c313a"/>
+  <circle cx="20" cy="18" r="6" fill="#ff5f57"/>
+  <circle cx="40" cy="18" r="6" fill="#febc2e"/>
+  <circle cx="60" cy="18" r="6" fill="#28c840"/>
+  <text x="450" y="22" text-anchor="middle" fill="#5c6370" font-size="12">/new-app — template repo → clone → seeded docs → setup handoff</text>
+  <text x="884" y="22" text-anchor="end" fill="#5c6370" font-size="10" font-style="italic">example output</text>
+  <text x="20" y="67.0" xml:space="preserve" class="mono"><tspan fill="#c678dd">$ </tspan><tspan fill="#d8dee9">/new-app </tspan><tspan fill="#5c6370">invoice-pilot -- AI invoice chasing for freelancers</tspan></text>
+  <text x="20" y="87.0" xml:space="preserve" class="mono"><tspan fill="#d8dee9"></tspan></text>
+  <text x="20" y="107.0" xml:space="preserve" class="mono"><tspan fill="#98c379">✓ Pre-flight: git · gh · bun on PATH — gh authenticated</tspan></text>
+  <text x="20" y="127.0" xml:space="preserve" class="mono"><tspan fill="#98c379">✓ Created </tspan><tspan fill="#61afef">seanningtatum/invoice-pilot</tspan><tspan fill="#98c379"> (private) from template repo</tspan></text>
+  <text x="20" y="147.0" xml:space="preserve" class="mono"><tspan fill="#98c379">✓ Cloned → ./invoice-pilot </tspan><tspan fill="#5c6370">(origin → new repo, fresh history, no fork link)</tspan></text>
+  <text x="20" y="167.0" xml:space="preserve" class="mono"><tspan fill="#98c379">✓ AGENTS.md seeded — symlink intact: </tspan><tspan fill="#5c6370">CLAUDE.md -&gt; AGENTS.md</tspan></text>
+  <text x="20" y="187.0" xml:space="preserve" class="mono"><tspan fill="#d8dee9"></tspan></text>
+  <text x="20" y="207.0" xml:space="preserve" class="mono"><tspan fill="#d8dee9" font-weight="bold">Next — run the Cloudflare wizard yourself (interactive, provisions billable resources):</tspan></text>
+  <text x="20" y="227.0" xml:space="preserve" class="mono"><tspan fill="#d8dee9"></tspan></text>
+  <text x="20" y="247.0" xml:space="preserve" class="mono"><tspan fill="#c678dd">  $ </tspan><tspan fill="#d8dee9">cd invoice-pilot</tspan></text>
+  <text x="20" y="267.0" xml:space="preserve" class="mono"><tspan fill="#c678dd">  $ </tspan><tspan fill="#d8dee9">bun install</tspan></text>
+  <text x="20" y="287.0" xml:space="preserve" class="mono"><tspan fill="#c678dd">  $ </tspan><tspan fill="#d8dee9">bun setup</tspan><tspan fill="#5c6370">   # D1 + R2 + auth secret + wrangler.jsonc + migrate + deploy</tspan></text>
+  <text x="20" y="307.0" xml:space="preserve" class="mono"><tspan fill="#d8dee9"></tspan></text>
+  <text x="20" y="327.0" xml:space="preserve" class="mono"><tspan fill="#5c6370">Stack: CF Workers · React Router v7 · tRPC · D1/Drizzle · Better Auth · Effect · ShadCN</tspan></text>
+</svg>
