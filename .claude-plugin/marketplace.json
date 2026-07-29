@@ -15,6 +15,13 @@
       "tags": ["engineering", "development"]
     },
     {
+      "name": "ai-toolkit",
+      "source": "./plugins/ai-toolkit",
+      "description": "Skills for building LLM features like software: versioned prompts, golden test sets, eval suites that gate CI, and coordinator/checker pipelines.",
+      "category": "development",
+      "tags": ["ai", "llm", "prompts", "evals"]
+    },
+    {
       "name": "marketing-toolkit",
       "source": "./plugins/marketing-toolkit",
       "description": "Skills for making generated docs and deliverables read as marketable, not just documented.",
