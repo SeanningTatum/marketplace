@@ -126,14 +126,19 @@ for (let attempt = 0; attempt <= MAX_REPAIRS; attempt++) {
   const draft = await worker(input, attempt > 0 ? previousViolations : undefined);
   const verdict = Verdict.parse(await checker(draft, contract));
   if (verdict.pass) return draft;
-  if (verdict.severity === "blocking" && attempt === MAX_REPAIRS) break;
-  previousViolations = verdict.violations;
+  previousViolations = verdict.violations;          // record before any exit
+  if (verdict.severity === "blocking" || attempt >= MAX_REPAIRS) break;
 }
 throw new PipelineError("checker rejected after repairs", { previousViolations });
 ```
 
 - **Fail closed.** Exhausting the budget surfaces the failure with the violations
-  attached — it never returns the last rejected draft as if it passed.
+  attached — it never returns the last rejected draft as if it passed. Record the
+  violations *before* any exit path, or the error you throw describes the previous
+  attempt instead of the one that actually failed.
+- **`blocking` exits immediately.** A blocking verdict on the first attempt means
+  the prompt or the contract is wrong — feeding it back as if it were repairable
+  just re-buys the same mistake. Only non-blocking violations are worth a retry.
 - **Two repairs, not ten.** If two rounds of explicit feedback do not fix it, the
   prompt or the contract is wrong; more attempts just burn tokens on the same
   mistake.
@@ -166,18 +171,29 @@ const graph = new StateGraph(State)
   .addNode("coordinate", coordinate)
   .addNode("work", work)
   .addNode("check", check)
+  // Budget exhausted with violations outstanding is a failure, not a result.
+  .addNode("fail", (s) => {
+    throw new PipelineError("checker rejected after repairs", {
+      violations: s.violations,
+    });
+  })
   .addEdge("__start__", "coordinate")
   .addEdge("coordinate", "work")
   .addEdge("work", "check")
   .addConditionalEdges("check", (s) =>
-    s.violations.length === 0 ? "__end__" : s.repairs >= 2 ? "__end__" : "work")
+    s.violations.length === 0 ? "__end__" : s.repairs >= 2 ? "fail" : "work")
   .compile();
 ```
 
-Two things to get right: **reducers** (a `messages`-style append reducer on a
-feedback field silently accumulates every past rejection into the next prompt),
-and the **loop bound** in the conditional edge — a graph with no repair ceiling is
-an unbounded spend.
+Three things to get right: **reducers** (a `messages`-style append reducer on a
+feedback field silently accumulates every past rejection into the next prompt);
+the **loop bound** in the conditional edge — a graph with no repair ceiling is an
+unbounded spend; and a **distinct failure terminal**. Routing an exhausted repair
+budget to `__end__` is the subtle one: the graph resolves normally, so a caller
+doing `await graph.invoke(input)` treats a rejected draft as a successful run and
+the fail-closed guarantee is silently gone. Either throw from a `fail` node as
+above, or carry an explicit `failed` flag in state that every caller checks — but
+do not share a terminal with the success path.
 
 ## Edge and serverless runtimes
 
