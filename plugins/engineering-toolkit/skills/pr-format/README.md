@@ -24,7 +24,7 @@ Writes a pull request description a reviewer can read top-to-bottom and fully un
 | **Caveats** | Honest risk surface: limitations, flags, rollback |
 | **Next steps** | Deliberately deferred work, with tickets |
 
-It derives What/How from the actual diff and commits, runs the repo's test command to fill Verification, and can create the PR itself via `gh pr create` (after showing you the final title + body).
+It derives What/How from the actual diff and commits, mines the project's own work records (plans, run notes, checkpoints, verification docs, eval history) for the context the diff doesn't carry, runs the repo's test command to fill Verification, and can create the PR itself via `gh pr create` (after showing you the final title + body). Audience is calibrated both ways: it won't re-explain your app to your teammates, and it won't assume they can reconstruct work that happened outside the diff.
 
 ## Why
 
