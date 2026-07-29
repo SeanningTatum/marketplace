@@ -13,6 +13,42 @@ fully understand *why* the change exists, *what* it does, *how* it works, and
 Readability is the goal. Every section earns its place or gets dropped. Prose
 over walls of text. A reviewer skimming on a phone should still get the story.
 
+## Audience calibration
+
+Get the assumed knowledge right — both directions:
+
+- **Assume the reader knows the product and the codebase.** Never re-explain
+  what the app does, how its architecture works, or what its established terms
+  mean. That context is the repo's job (README, docs); repeating it in a PR
+  body is noise that buries the change.
+- **Assume the reader knows nothing about *this work*.** Anything that lives
+  outside the diff — decisions from review rounds, baselines, measured
+  before/after numbers, why the obvious alternative lost, constraints
+  discovered mid-flight — must be supplied, or the reader cannot reconstruct
+  your reasoning.
+- **The jargon test:** define a term only when this PR introduces it or uses
+  it in a way the codebase doesn't. New subsystem with new vocabulary? Define
+  it in one line at first use. A term the repo already runs on? Use it and
+  move on.
+
+## Sourcing: diff tells you what, records tell you why
+
+The diff and commit messages show what changed. They do not show why, what
+was decided along the way, or what was observed — and that missing half is
+exactly what makes a body read as over-simplified. Before writing, mine the
+project's own work trail for the sections the diff can't fill:
+
+- **Why** — plan/design artifacts, linked issues, review-round decisions
+  (e.g. `plans/`, `.brain/features/`, or the repo's equivalents).
+- **How / Solution** — decision records: what options were weighed and which
+  was locked, including anything decided in review rather than in code.
+- **Verification** — recorded runs: run notes, session checkpoints,
+  verification docs, eval/test run history (e.g. `.brain/runs/`, CI links).
+  Prefer citing a recorded observation over re-deriving one from memory —
+  a number someone can re-run beats a claim.
+
+Not every repo keeps these. Use what exists; never invent records to cite.
+
 ## When to use
 
 - Opening a new PR (fill the body from the template below).
@@ -79,13 +115,16 @@ Follow-up work this PR intentionally defers. Link tickets. Distinguishes
   the check itself is the reassurance a reviewer needs.
 - **Prose density matches the change.** A one-line fix gets a tight three-section
   body (Why / What / Verification). A feature gets all seven. Don't ceremony-fill.
+- **Calibrate the audience.** Don't re-explain the app or its established
+  terms; don't assume the work explains itself either — supply the context
+  that lives outside the diff (decisions, baselines, measured numbers).
 - **Link everything linkable** — issues, tickets, related PRs, design docs, dashboards.
 - **Write in the imperative/declarative, past-neutral voice.** "Adds retry to the
   upload path", not "I added...". Match the repo's existing PR voice if it has one.
 
 ## Workflow when generating a PR body
 
-1. Read the diff (`git diff <base>...HEAD`) and the commit messages — derive What/How from it, don't ask.
+1. Read the diff (`git diff <base>...HEAD`) and the commit messages — then read the project's work records (see "Sourcing" above) for the context the diff doesn't carry. Derive What/How from these, don't ask.
 2. Find the linked issue/ticket for Why; if none, ask the user for the one-line why.
 3. Run/collect verification: check for a test command in the repo, run it, capture the result. For UI, ask for or capture screenshots.
 4. Fill the template. Drop sections per Rules. Keep it skimmable.
