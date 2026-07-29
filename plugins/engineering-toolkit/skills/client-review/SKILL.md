@@ -14,8 +14,10 @@ We then convert their returned file into markdown for our working agents.
 
 1. **Build** — author or take an existing HTML doc, then inject the annotation layer:
    ```
-   node ${CLAUDE_PLUGIN_ROOT}/skills/client-review/inject.mjs <doc.html> [-o out.html]
+   node <skill-dir>/inject.mjs <doc.html> [-o out.html]
    ```
+   `<skill-dir>` is the directory containing this SKILL.md (Claude Code:
+   `${CLAUDE_PLUGIN_ROOT}/skills/client-review`; Kimi Code: `${KIMI_SKILL_DIR}`).
    Default output is `<name>.commented.html` next to the source. This step is
    **idempotent** — running it again (including on a file the client already
    returned) preserves any existing comments and just ensures the layer/assets
@@ -57,7 +59,7 @@ We then convert their returned file into markdown for our working agents.
 
 5. **Read (for agents)** — convert any returned file to markdown on the CLI:
    ```
-   node ${CLAUDE_PLUGIN_ROOT}/skills/client-review/read.mjs <returned.html>
+   node <skill-dir>/read.mjs <returned.html>
    ```
    Prints comment markdown to stdout — pipe to a file or straight into the next
    agent's context. Each comment appears anchored (element/text/image/pin),
@@ -88,7 +90,7 @@ the page. Anchor types you'll see referenced per comment:
 
 Start from the starter template:
 ```
-${CLAUDE_PLUGIN_ROOT}/skills/client-review/template.html
+<skill-dir>/template.html
 ```
 It is a plain, uninjected HTML doc (warm editorial style, placeholder
 content) — edit its content for the real doc, then run `inject.mjs` on it

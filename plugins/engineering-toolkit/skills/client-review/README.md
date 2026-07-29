@@ -30,11 +30,13 @@ Client feedback usually arrives as an email thread describing locations by prose
 
 ```bash
 # inject the annotation layer into any HTML doc
-node ${CLAUDE_PLUGIN_ROOT}/skills/client-review/inject.mjs proposal.html
+node <skill-dir>/inject.mjs proposal.html
 # → proposal.commented.html  (send this file to the client)
 
 # when it comes back, read the comments as markdown
-node ${CLAUDE_PLUGIN_ROOT}/skills/client-review/read.mjs proposal.returned.html
+node <skill-dir>/read.mjs proposal.returned.html
 ```
+
+`<skill-dir>` is the skill's own directory (Claude Code: `${CLAUDE_PLUGIN_ROOT}/skills/client-review`; Kimi Code: `${KIMI_SKILL_DIR}`).
 
 Authoring from scratch? Start from `template.html` (plain, uninjected, warm editorial style), edit the content, then run `inject.mjs` as the last step. Two limits to respect: don't edit a returned file's document body (re-author and re-inject instead), and if the client returns multiple versions, the latest one wins — don't merge comment sets.

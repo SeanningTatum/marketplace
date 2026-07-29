@@ -1,0 +1,11 @@
+{
+  "name": "ai-toolkit",
+  "description": "Skills for building LLM features like software: versioned prompts, golden test sets, eval suites that gate CI, and coordinator/checker pipelines.",
+  "author": "Sean Stuart Urgel <sean@casperstudios.xyz>",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "AI Toolkit",
+    "shortDescription": "LLM features built like code — versioned prompts, golden sets, evals that gate CI.",
+    "developerName": "Sean Stuart Urgel"
+  }
+}

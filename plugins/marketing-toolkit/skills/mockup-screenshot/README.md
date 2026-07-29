@@ -28,8 +28,10 @@ A README with no visual reads as unfinished or unverified, but plenty of real sk
 ### Terminal transcript (parameterized)
 
 ```bash
-node ${CLAUDE_PLUGIN_ROOT}/skills/mockup-screenshot/lib/terminal-mockup.mjs <spec.json> -o example-output.svg
+node <skill-dir>/lib/terminal-mockup.mjs <spec.json> -o example-output.svg
 ```
+
+`<skill-dir>` is the skill's own directory (Claude Code: `${CLAUDE_PLUGIN_ROOT}/skills/mockup-screenshot`; Kimi Code: `${KIMI_SKILL_DIR}`).
 
 See `examples/sample.spec.json` for the spec format (title, width, colored/bold line spans).
 
