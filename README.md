@@ -1,6 +1,6 @@
 # marketplace
 
-**Skills for [Claude Code](https://claude.com/claude-code) that ship code, not just suggest it** — scaffold an app, get a browser-verified and AI-reviewed PR open, triage feedback, cut a branded release, round-trip client comments, and put your prompts behind a real eval gate. Sean's personal, actively-developed plugin marketplace.
+**Skills for [Claude Code](https://claude.com/claude-code) and [Kimi Code](https://www.kimi.com/code) that ship code, not just suggest it** — scaffold an app, get a browser-verified and AI-reviewed PR open, triage feedback, cut a branded release, round-trip client comments, and put your prompts behind a real eval gate. Sean's personal, actively-developed plugin marketplace.
 
 <p align="center">
   <img src="./docs/assets/demo.gif" alt="The engineering-toolkit ship-it loop: scaffold, build, browser-verified and AI-reviewed PR, triage comments, branded release" width="800">
@@ -11,14 +11,29 @@
 ![Plugins](https://img.shields.io/badge/plugins-3-blue)
 ![Skills](https://img.shields.io/badge/skills-11-brightgreen)
 ![Marketplace](https://img.shields.io/badge/claude--code-marketplace-orange)
+![Kimi Code](https://img.shields.io/badge/kimi--code-plugins-blueviolet)
 
 ## Install
+
+Claude Code:
 
 ```
 /plugin marketplace add SeanningTatum/marketplace
 /plugin install engineering-toolkit@sean-skills
 /plugin install ai-toolkit@sean-skills
 /plugin install marketing-toolkit@sean-skills
+```
+
+Kimi Code — everything in one shot, no clone needed:
+
+```
+/plugins install https://github.com/SeanningTatum/marketplace
+```
+
+Or per-plugin from a local clone (uses `kimi-marketplace.json`):
+
+```
+/plugins marketplace ./kimi-marketplace.json
 ```
 
 ## Plugins
@@ -62,8 +77,12 @@ Every skill ships a README with a visual of what it produces. A few of the surfa
 ## Develop
 
 ```bash
-claude plugin validate .                          # validate the catalog
-claude --plugin-dir ./plugins/engineering-toolkit # test a plugin locally
+claude plugin validate .                          # validate the catalog (Claude Code)
+claude --plugin-dir ./plugins/engineering-toolkit # test a plugin locally (Claude Code)
 ```
+
+For Kimi Code, install a plugin locally (`/plugins install ./plugins/<name>`) and
+check `/plugins info <name>` for manifest diagnostics — there is no standalone
+Kimi validator.
 
 See [CLAUDE.md](./CLAUDE.md) for repository structure and conventions.

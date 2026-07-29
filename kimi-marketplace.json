@@ -1,0 +1,20 @@
+{
+  "version": "2",
+  "plugins": [
+    {
+      "id": "engineering-toolkit",
+      "displayName": "Engineering Toolkit",
+      "source": "./plugins/engineering-toolkit"
+    },
+    {
+      "id": "ai-toolkit",
+      "displayName": "AI Toolkit",
+      "source": "./plugins/ai-toolkit"
+    },
+    {
+      "id": "marketing-toolkit",
+      "displayName": "Marketing Toolkit",
+      "source": "./plugins/marketing-toolkit"
+    }
+  ]
+}

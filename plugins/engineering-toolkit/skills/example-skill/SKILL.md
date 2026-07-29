@@ -1,4 +1,5 @@
 ---
+name: example-skill
 description: Starter skill template. Replace this with a real SaaS engineering skill. Delete once you add your own.
 ---
 

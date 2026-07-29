@@ -1,0 +1,11 @@
+{
+  "name": "marketing-toolkit",
+  "description": "Skills for making generated docs and deliverables read as marketable, not just documented.",
+  "author": "Sean Stuart Urgel <sean@casperstudios.xyz>",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Marketing Toolkit",
+    "shortDescription": "The last-mile polish — make what you shipped legible and marketable.",
+    "developerName": "Sean Stuart Urgel"
+  }
+}

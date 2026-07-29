@@ -58,6 +58,33 @@ never receive updates (Claude Code sees the same version string and keeps the
 cached copy). Set it in **one** place — `plugin.json` wins over the marketplace
 entry silently, so a stale `plugin.json` version masks the marketplace one.
 
+## Kimi compatibility
+
+This marketplace is dual-tool: every plugin must also load in **Kimi Code CLI**.
+Keep these in sync with their Claude counterparts on every change:
+
+- `plugins/<name>/kimi.plugin.json` — Kimi manifest per plugin
+  (`name`, `description`, `skills: "./skills/"`). Kimi `name` must match
+  `[a-z0-9][a-z0-9_-]{0,63}`.
+- Root `kimi.plugin.json` — exposes all plugins' skills as one `sean-skills`
+  plugin so `/plugins install https://github.com/SeanningTatum/marketplace`
+  works without cloning. Update its `skills` list when plugins are added/removed.
+- Root `kimi-marketplace.json` — Kimi custom-marketplace catalog
+  (`"version": "2"`, `id` + `source`) for per-plugin installs from a local clone.
+
+Two skill-authoring rules exist only because of Kimi:
+
+- **`SKILL.md` frontmatter needs `name` *and* `description`** — Kimi's
+  directory-form parser fails without both (Claude only requires `description`).
+- **No `${CLAUDE_PLUGIN_ROOT}` in `SKILL.md` bodies** — Kimi doesn't expand it.
+  Reference files relative to the skill's own directory (`<skill-dir>/…`) and
+  note both expansions once (`${CLAUDE_PLUGIN_ROOT}/skills/<skill>` for Claude,
+  `${KIMI_SKILL_DIR}` for Kimi). See `client-review/SKILL.md` for the pattern.
+
+Kimi has no standalone validator — install locally and read diagnostics:
+`/plugins install ./plugins/<name>`, then `/plugins info <name>`.
+Kimi skills are invoked as `/skill:<skill>` (no plugin namespace).
+
 ## Working in this repo
 
 Validate after any change to `marketplace.json` or a plugin — this is the only
@@ -85,7 +112,10 @@ claude --plugin-dir ./plugins/engineering-toolkit
 4. Add a `plugins[]` entry to `.claude-plugin/marketplace.json` with a
    `"./plugins/<name>"` source, and add a row for the plugin to the root
    `README.md`'s plugins table.
-5. `claude plugin validate .`, then commit.
+5. Mirror it for Kimi (see "Kimi compatibility"): a `kimi.plugin.json` in the
+   plugin root, an entry in `kimi-marketplace.json`, and the plugin's skills
+   dir in the root `kimi.plugin.json`'s `skills` list.
+6. `claude plugin validate .`, then commit.
 
 ## Adding a skill
 

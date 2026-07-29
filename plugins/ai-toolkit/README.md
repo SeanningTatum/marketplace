@@ -1,18 +1,26 @@
 # ai-toolkit
 
-**Ship LLM features the way you ship code** — versioned prompts, golden test sets, an eval suite that fails the build, and pipelines whose checker can actually say no. For [Claude Code](https://claude.com/claude-code).
+**Ship LLM features the way you ship code** — versioned prompts, golden test sets, an eval suite that fails the build, and pipelines whose checker can actually say no. For [Claude Code](https://claude.com/claude-code) and [Kimi Code](https://www.kimi.com/code).
 
 ![Skills](https://img.shields.io/badge/skills-3-brightgreen)
 ![Stack](https://img.shields.io/badge/agnostic-zod%20%2B%20promptfoo%20%2B%20LangGraph%20when%20earned-blue)
 
 ## Install
 
+Claude Code:
+
 ```
 /plugin marketplace add SeanningTatum/marketplace
 /plugin install ai-toolkit@sean-skills
 ```
 
-Skills are invoked as `/ai-toolkit:<skill>`, or auto-invoked when the conversation matches their description.
+Kimi Code (from a clone of this repo):
+
+```
+/plugins install ./plugins/ai-toolkit
+```
+
+Skills are invoked as `/ai-toolkit:<skill>` (Claude Code) or `/skill:<skill>` (Kimi Code), or auto-invoked when the conversation matches their description.
 
 ## Skills
 

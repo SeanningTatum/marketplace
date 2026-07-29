@@ -1,0 +1,11 @@
+{
+  "name": "engineering-toolkit",
+  "description": "General software engineering skills and workflows.",
+  "author": "Sean Stuart Urgel <sean@casperstudios.xyz>",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Engineering Toolkit",
+    "shortDescription": "The ship-it loop, end to end — scaffold, verify, review, resolve, release.",
+    "developerName": "Sean Stuart Urgel"
+  }
+}

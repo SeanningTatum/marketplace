@@ -1,0 +1,17 @@
+{
+  "name": "sean-skills",
+  "description": "Sean's personal plugins for SaaS engineering and automations — all skills from engineering-toolkit, ai-toolkit, and marketing-toolkit in one install.",
+  "author": "Sean Stuart Urgel <sean@casperstudios.xyz>",
+  "homepage": "https://github.com/SeanningTatum/marketplace",
+  "skills": [
+    "./plugins/engineering-toolkit/skills/",
+    "./plugins/ai-toolkit/skills/",
+    "./plugins/marketing-toolkit/skills/"
+  ],
+  "interface": {
+    "displayName": "Sean's Skills",
+    "shortDescription": "Ship code, gate prompts with evals, and polish the last mile — all 11 skills in one install.",
+    "developerName": "Sean Stuart Urgel",
+    "websiteURL": "https://github.com/SeanningTatum/marketplace"
+  }
+}

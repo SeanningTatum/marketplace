@@ -1,18 +1,26 @@
 # engineering-toolkit
 
-**Ship code like a senior engineer reviewed it before you asked** — six skills covering the full loop from scaffold to release, for [Claude Code](https://claude.com/claude-code).
+**Ship code like a senior engineer reviewed it before you asked** — six skills covering the full loop from scaffold to release, for [Claude Code](https://claude.com/claude-code) and [Kimi Code](https://www.kimi.com/code).
 
 ![Skills](https://img.shields.io/badge/skills-6-brightgreen)
 ![Stack](https://img.shields.io/badge/uses-gh%20%2B%20Greptile-blue)
 
 ## Install
 
+Claude Code:
+
 ```
 /plugin marketplace add SeanningTatum/marketplace
 /plugin install engineering-toolkit@sean-skills
 ```
 
-Skills are invoked as `/engineering-toolkit:<skill>`, or auto-invoked when the conversation matches their description.
+Kimi Code (from a clone of this repo):
+
+```
+/plugins install ./plugins/engineering-toolkit
+```
+
+Skills are invoked as `/engineering-toolkit:<skill>` (Claude Code) or `/skill:<skill>` (Kimi Code), or auto-invoked when the conversation matches their description.
 
 ## Skills
 

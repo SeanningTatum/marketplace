@@ -56,8 +56,11 @@ generator, not freehand drawing — write the spec, run the CLI, get the SVG.
 **Generate:**
 
 ```bash
-node ${CLAUDE_PLUGIN_ROOT}/skills/mockup-screenshot/lib/terminal-mockup.mjs <spec.json> -o example-output.svg
+node <skill-dir>/lib/terminal-mockup.mjs <spec.json> -o example-output.svg
 ```
+
+`<skill-dir>` is the directory containing this SKILL.md (Claude Code:
+`${CLAUDE_PLUGIN_ROOT}/skills/mockup-screenshot`; Kimi Code: `${KIMI_SKILL_DIR}`).
 
 Or import it directly in a throwaway script for anything the CLI doesn't cover
 (`import { buildTerminalSVG } from ".../lib/terminal-mockup.mjs"`).
