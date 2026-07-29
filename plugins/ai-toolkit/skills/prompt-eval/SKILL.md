@@ -66,7 +66,8 @@ measurement instrument that itself needs calibrating.
   `output_config.format` or a `strict: true` tool — never free prose you regex.
 - **Pin the judge model separately** from the model under test, and record it in
   the run metadata. `claude-sonnet-5` is a good default; `claude-haiku-4-5` for
-  high-volume cheap classification.
+  high-volume cheap classification — but note Haiku 4.5 **takes no `effort`
+  parameter**, so a Haiku judge omits it rather than setting `medium`.
 - **Never let the model under test judge its own output.** Same-model grading
   measures self-consistency, not correctness.
 - **The judge sees the output and the rubric — not the reasoning.** Feeding it the

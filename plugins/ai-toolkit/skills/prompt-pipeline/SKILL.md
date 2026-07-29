@@ -66,7 +66,9 @@ Plans and routes. Never does the bulk work itself.
 Do one narrow thing each.
 
 - Cheap tier — `claude-haiku-4-5` or `claude-sonnet-5`. Most worker tasks are
-  extraction, classification, or a single transformation.
+  extraction, classification, or a single transformation. **`claude-haiku-4-5`
+  takes no `effort` parameter** — passing one errors, so a Haiku worker pins the
+  model only. `effort` is available on Opus 5 and Sonnet 5.
 - Each worker is its own scaffolded prompt with its own golden set and its own
   output schema. If a worker's schema is "a string", the boundary is wrong.
 - Workers are independent: no worker reads another worker's reasoning. Pass data,

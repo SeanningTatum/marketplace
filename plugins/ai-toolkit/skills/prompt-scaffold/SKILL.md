@@ -95,7 +95,9 @@ Rules that are not negotiable:
 - **Pin the model id in the module.** A model swap changes outputs, invalidates
   the prompt cache, and voids the eval baseline. It is a version bump, not a
   config tweak. Use only real ids — `claude-opus-5`, `claude-sonnet-5`,
-  `claude-haiku-4-5`.
+  `claude-haiku-4-5`. **`effort` is not universal:** Opus 5 and Sonnet 5 accept
+  `low`–`max`, but `claude-haiku-4-5` takes no `effort` at all and errors if you
+  send one — a Haiku module omits the field instead of setting it.
 - **The output contract is a schema, not a hope.** Never parse prose. Use
   structured outputs so the provider enforces the shape (below).
 - **Stable content first, volatile content last.** Caching is a prefix match:
